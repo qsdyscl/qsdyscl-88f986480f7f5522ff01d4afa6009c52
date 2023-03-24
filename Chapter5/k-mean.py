@@ -3,13 +3,13 @@ import numpy as np
 import time
 import matplotlib
 import matplotlib.pyplot as plt
-from sklearn.datasets.samples_generator import make_blobs
-from sklearn.datasets.samples_generator import make_circles
+from sklearn.datasets._samples_generator import make_blobs
+from sklearn.datasets._samples_generator import make_circles
 
 DATA_TYPE = 'blobs'
 N = 200
 # 集群的数量，如果我们选择圆圈，只有2个就足够了
-if (DATA_TYPE == 'circle'):
+if DATA_TYPE == 'circle':
     K = 2
 else:
     K = 4
@@ -17,7 +17,7 @@ else:
 MAX_ITERS = 1000
 start = time.time()
 centers = [(-2, -2), (-2, 1.5), (1.5, -2), (2, 1.5)]
-if (DATA_TYPE == 'circle'):
+if DATA_TYPE == 'circle':
     data, features = make_circles(n_samples=200, shuffle=True, noise=0.01, factor=0.4)
 else:
     data, features = make_blobs(n_samples=200, centers=centers,
@@ -27,7 +27,7 @@ ax.scatter(np.asarray(centers).transpose()[0], np.asarray(centers).transpose()[1
            marker='o', s=250)
 plt.show()
 fig, ax = plt.subplots()
-if (DATA_TYPE == 'blobs'):
+if DATA_TYPE == 'blobs':
     ax.scatter(np.asarray(centers).transpose()[0], np.asarray(centers).transpose()[1],
                marker='o', s=250)
     ax.scatter(data.transpose()[0], data.transpose()[1], marker='o',
@@ -44,8 +44,7 @@ rep_points = tf.reshape(tf.tile(points, [1, K]), [N, K, 2])
 sum_squares = tf.reduce_sum(tf.square(rep_points - rep_centroids),
                             reduction_indices=2)
 best_centroids = tf.argmin(sum_squares, 1)
-did_assignments_change =
-tf.reduce_any(tf.not_equal(best_centroids, cluster_assignments))
+did_assignments_change = tf.reduce_any(tf.not_equal(best_centroids, cluster_assignments))
 
 
 def bucket_mean(data, bucket_ids, num_buckets):
@@ -62,7 +61,7 @@ with tf.control_dependencies([did_assignments_change]):
 changed = True
 iters = 0
 fig, ax = plt.subplots()
-if (DATA_TYPE == 'blobs'):
+if DATA_TYPE == 'blobs':
     colourindexes = [2, 1, 4, 3]
 else:
     colourindexes = [2, 1]

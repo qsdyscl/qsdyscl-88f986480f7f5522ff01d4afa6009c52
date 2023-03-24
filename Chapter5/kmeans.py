@@ -16,7 +16,7 @@ def kMeans(dataSet, k):
     while flag:
         flag = False  # 预置标志位为False
         # 1.构建ClustDist： 遍历DataSet数据集,计算DataSet每行与聚类的最小欧式距离        #将此结果赋值ClustDist=[minIndex,minDist]
-        for i in xrange(m):
+        for i in range(m):
             # 遍历k个聚类中心,获取最短距离
             distlist = [distEclud(clustercents[j, :], dataSet[i, :]) for j in range(k)]
             minDist = min(distlist)
@@ -30,7 +30,7 @@ def kMeans(dataSet, k):
         # 用聚类中心cent切分为ClustDist，返回dataSet的行索引
         # 并以此从dataSet中提取对应的行向量构成新的ptsInClust
         # 计算分隔后ptsInClust各列的均值，以此更新聚类中心clustercents的各项值
-        for cent in xrange(k):
+        for cent in range(k):
             # 从ClustDist的第一列中筛选出等于cent值的行下标
             dInx = nonzero(ClustDist[:, 0].A == cent)[0]
             # 从dataSet中提取行下标==dInx构成一个新数据集

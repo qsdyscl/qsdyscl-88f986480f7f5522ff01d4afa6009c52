@@ -3,7 +3,7 @@ import numpy as np
 import time
 import matplotlib
 import matplotlib.pyplot as plt
-from sklearn.datasets.samples_generator import make_circles
+from sklearn.datasets._samples_generator import make_circles
 
 N = 210
 K = 2
@@ -25,13 +25,12 @@ sess.run(tf.initialize_all_variables())
 test = []
 
 for i, j in zip(te_data, te_features):
-    distances = tf.reduce_sum(tf.square(tf.sub(i, tr_data)), reduction_indices=1)
+    distances = tf.reduce_sum(tf.square(tf.subtract(i, tr_data)), reduction_indices=1)
     neighbor = tf.arg_min(distances, 0)
     # print tr_features[sess.run(neighbor)]
     # print j
     test.append(tr_features[sess.run(neighbor)])
-print
-test
+print(test)
 fig, ax = plt.subplots()
 ax.scatter(te_data.transpose()[0], te_data.transpose()[1], marker='o',
            s=100, c=test, cmap=plt.cm.coolwarm)

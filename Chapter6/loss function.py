@@ -53,4 +53,4 @@ plt.plot(x_vals, best_fit, 'r-', label='Base fit line')
 plt.title('Batch Look Loss')
 plt.xlabel('Generation')
 plt.ylabel('Loss')
-plt.show(
+plt.show()

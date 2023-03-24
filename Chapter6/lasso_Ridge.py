@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import sys
 import numpy as np
 import tensorflow as tf
-# from sklearn import datasets
+from sklearn import datasets
 from tensorflow.python.framework import ops
 
 # 指定“岭”或“lasso”
@@ -41,7 +41,7 @@ if regression_type == 'LASSO':
     # Lasso 损失= L2_Loss + heavyside_step,
     # Where heavyside_step ~ 0 if A < constant, otherwise ~ 99
     lasso_param = tf.constant(0.9)
-    heavyside_step = tf.truep(1., tf.add(1.,
+    heavyside_step = tf.truediv(1., tf.add(1.,
                                          tf.exp(tf.multiply(-50., tf.subtract(A, lasso_param)))))
     regularization_param = tf.multiply(heavyside_step, 99.)
     loss = tf.add(tf.reduce_mean(tf.square(y_target - model_output)), regularization_param)
